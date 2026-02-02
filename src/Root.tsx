@@ -2,6 +2,7 @@ import "./index.css";
 import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
+import { Test } from "./Test";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -42,6 +43,14 @@ export const RemotionRoot: React.FC = () => {
           logoColor2: "#86A8E7" as const,
         }}
       />
+      <Composition
+      id="Test"
+      durationInFrames={150}
+      fps={30}
+      width={1920}
+      height={1080}
+      component={Test}
+    />
     </>
   );
 };
