@@ -1,8 +1,12 @@
 import { AbsoluteFill, interpolate, Sequence, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { linearTiming, TransitionSeries } from "@remotion/transitions";
+import { slide } from "@remotion/transitions/slide";
+import { LightLeak } from "@remotion/light-leaks";
 
 export const Test = () => {
     const frame = useCurrentFrame();
     const { fps, durationInFrames, width, height } = useVideoConfig();
+    const linearDuration = linearTiming({ durationInFrames: 30 }).getDurationInFrames({ fps });
     const opacity1 = interpolate(frame, [0, 60], [0, 1], {
         extrapolateRight: "clamp",
     });
@@ -10,6 +14,14 @@ export const Test = () => {
         fps,
         frame,
     });
+
+    const Letter: React.FC<{ color: string; children: React.ReactNode }> = ({ color, children }) => {
+        return (
+            <div style={{ color, fontSize: 120, fontWeight: 700, textAlign: "center" }}>
+                {children}
+            </div>
+        );
+    };
 
     const Title: React.FC<{ title: string }> = ({ title }) => {
         const frame = useCurrentFrame();
@@ -48,8 +60,38 @@ export const Test = () => {
                     fontSize: "1em",
                 }}
             >
+                <div style={{ transform: `scale(${scale})` }}>Spring animations</div>
             </div>
-            <div style={{ transform: `scale(${scale})` }}>Spring animations</div>
+            <div style={{ position: 'relative', height: 120, width: '100%' }}>
+                <TransitionSeries>
+                    <TransitionSeries.Sequence durationInFrames={40}>
+                        <Letter color="#0b84f3">A</Letter>
+                    </TransitionSeries.Sequence>
+                    <TransitionSeries.Transition
+                        presentation={slide()}
+                        timing={linearTiming({ durationInFrames: 30 })}
+                    />
+                    <TransitionSeries.Sequence durationInFrames={60}>
+                        <Letter color="pink">B</Letter>
+                    </TransitionSeries.Sequence>
+                </TransitionSeries>
+            </div>
+            <div style={{ position: 'relative', height: 120, width: '100%' }}>
+                <TransitionSeries>
+                    <TransitionSeries.Sequence durationInFrames={40}>
+                        <Letter color="#0b84f3">A</Letter>
+                    </TransitionSeries.Sequence>
+                    <TransitionSeries.Overlay durationInFrames={20}>
+                        <LightLeak />
+                    </TransitionSeries.Overlay>
+                    <TransitionSeries.Sequence durationInFrames={60}>
+                        <Letter color="pink">B</Letter>
+                    </TransitionSeries.Sequence>
+                </TransitionSeries>
+            </div>
+            <div>
+                linearTiming duration: {linearDuration} frames
+            </div>
         </AbsoluteFill>
     );
 };
