@@ -1,9 +1,9 @@
-import { AbsoluteFill, interpolate, Sequence, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, Sequence, spring, useCurrentFrame, useVideoConfig, random } from "remotion";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import { LightLeak } from "@remotion/light-leaks";
 
-export const Test = () => {
+export const Test1: React.FC = () => {
     const frame = useCurrentFrame();
     const { fps, durationInFrames, width, height } = useVideoConfig();
     const linearDuration = linearTiming({ durationInFrames: 30 }).getDurationInFrames({ fps });
@@ -33,6 +33,7 @@ export const Test = () => {
             <div style={{ opacity, textAlign: 'center', fontSize: '1em' }}>{title}</div>
         );
     };
+    const randomValue = random(frame);
 
     return (
         <AbsoluteFill
@@ -91,6 +92,9 @@ export const Test = () => {
             </div>
             <div>
                 linearTiming duration: {linearDuration} frames
+            </div>
+            <div>
+               {randomValue},{randomValue}
             </div>
         </AbsoluteFill>
     );

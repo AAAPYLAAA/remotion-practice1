@@ -8,6 +8,7 @@
   "dependencies": {
     "@remotion/cli": "4.0.417",
     "@remotion/light-leaks": "4.0.417",
+    "@remotion/noise": "^4.0.429",
     "@remotion/tailwind-v4": "4.0.417",
     "@remotion/transitions": "4.0.417",
     "@remotion/zod-types": "4.0.417",
