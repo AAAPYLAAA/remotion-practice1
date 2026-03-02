@@ -4,6 +4,7 @@ import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import { Test1 } from "./Test1";
 import { Test2 } from "./Test2";
+import { AnimationMath } from "./Test3";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -45,21 +46,30 @@ export const RemotionRoot: React.FC = () => {
         }}
       />
       <Composition
-      id="Test1"
-      durationInFrames={150}
-      fps={30}
-      width={1920}
-      height={1080}
-      component={Test1}
+        id="Test1"
+        durationInFrames={150}
+        fps={30}
+        width={1920}
+        height={1080}
+        component={Test1}
       />
       <Composition
-      id="Test2"
-      durationInFrames={150}
-      fps={30}
-      width={1920}
-      height={1080}
-      component={Test2}
+        id="Test2"
+        durationInFrames={150}
+        fps={30}
+        width={1920}
+        height={1080}
+        component={Test2}
       />
+      <Composition
+        id="Test3"
+        durationInFrames={150}
+        fps={30}
+        width={1920}
+        height={1080}
+        component={AnimationMath}
+      />
+
     </>
   );
 };
